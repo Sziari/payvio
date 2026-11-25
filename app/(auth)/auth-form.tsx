@@ -13,18 +13,19 @@ type Props = {
   submitLabel: string;
   fields: { name: string; label: string; type?: string; autoComplete?: string; hint?: string }[];
   footer?: { text: string; href: string; link: string };
+  extraLink?: { href: string; label: string };
 };
 
-export function AuthForm({ title, subtitle, action, submitLabel, fields, footer }: Props) {
+export function AuthForm({ title, subtitle, action, submitLabel, fields, footer, extraLink }: Props) {
   const [state, formAction, pending] = useActionState(action, undefined);
   return (
     <main className="grid min-h-screen place-items-center px-4 py-10">
       <div className="w-full max-w-sm">
         <div className="mb-6 text-center">
-          <span className="mx-auto grid size-11 place-items-center rounded-xl bg-accent text-lg font-bold text-black">
-            {brand.name.slice(0, 1)}
-          </span>
-          <p className="mt-3 text-sm text-muted">{brand.tagline}</p>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={brand.logo} alt={brand.name} className="mx-auto size-11 rounded-xl" />
+          <p className="mt-2 text-xl font-semibold">{brand.name}</p>
+          <p className="text-sm text-muted">{brand.tagline}</p>
         </div>
         <Card className="p-6">
           <h1 className="text-xl font-semibold">{title}</h1>
@@ -42,6 +43,13 @@ export function AuthForm({ title, subtitle, action, submitLabel, fields, footer 
             </Button>
           </form>
         </Card>
+        {extraLink && (
+          <p className="mt-4 text-center text-sm">
+            <Link href={extraLink.href} className="text-muted underline">
+              {extraLink.label}
+            </Link>
+          </p>
+        )}
         {footer && (
           <p className="mt-4 text-center text-sm text-muted">
             {footer.text}{" "}

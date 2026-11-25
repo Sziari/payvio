@@ -3,6 +3,9 @@ import { loadContext } from "@/lib/data/context";
 import { AuthForm } from "../auth-form";
 import { createCompany } from "../actions";
 
+// Always render fresh: every page shows the signed-in company's live data.
+export const dynamic = "force-dynamic";
+
 export default async function OnboardingPage() {
   const ctx = await loadContext();
   if (!ctx.user) redirect("/login");

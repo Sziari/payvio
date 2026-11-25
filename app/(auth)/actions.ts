@@ -53,3 +53,23 @@ export async function createCompany(_prev: FormState, form: FormData): Promise<F
   if (error) return { error: error.message };
   redirect("/dashboard?welcome=1");
 }
+
+export async function requestPasswordReset(_prev: FormState, form: FormData): Promise<FormState> {
+  if (isDemo) redirect("/dashboard");
+  const email = String(form.get("email") ?? "").trim();
+  if (!email) return { error: "Enter your email." };
+  const db = await createSupabaseServer();
+  await db.auth.resetPasswordForEmail(email, { redirectTo: `${appUrl()}/auth/callback?next=/reset-password` });
+  // Same message either way, so this can't be used to check who has an account.
+  return { message: "If that email has an account, a reset link is on its way." };
+}
+
+export async function setNewPassword(_prev: FormState, form: FormData): Promise<FormState> {
+  if (isDemo) redirect("/dashboard");
+  const password = String(form.get("password") ?? "");
+  if (password.length < 8) return { error: "Use at least 8 characters." };
+  const db = await createSupabaseServer();
+  const { error } = await db.auth.updateUser({ password });
+  if (error) return { error: "That link has expired. Ask for a new reset email." };
+  redirect("/dashboard");
+}

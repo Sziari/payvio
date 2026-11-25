@@ -1,36 +1,42 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Payvio
 
-## Getting Started
+**Know your cash. Know your jobs.** Cash flow and job cost for trade subcontractors.
 
-First, run the development server:
+- **AP Inbox**: upload or email supplier invoices; AI reads them, suggests the job, flags duplicates; a person confirms.
+- **Jobs**: cost by job, supplier, month and cost type vs budget. CSV and Excel export.
+- **Cash Forecast**: 13 weeks of customer payments, payroll, loans, leases and supplier bills, with what-if dragging.
+- **Dashboard**: drag-and-drop widgets, saved per company.
+- **Connections**: bank balances via Plaid, bills and suppliers to QuickBooks Online.
+
+## Quick start
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open http://localhost:3000. With no keys it runs in **demo mode** on sample data.
+To go live, follow [docs/SETUP.md](docs/SETUP.md).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Customizing
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Most changes are a one-line edit in `/config`:
 
-## Learn More
+| Change | File |
+|---|---|
+| Name, colors, logo | `config/brand.ts` |
+| Sidebar menu | `config/navigation.ts` |
+| Default dashboard layout | `config/dashboard.ts` |
+| Invoice statuses, approval limits, cost types | `config/workflows.ts` |
+| Turn features on or off | `config/features.ts` |
 
-To learn more about Next.js, take a look at the following resources:
+New dashboard widgets are registered in `components/widgets/registry.tsx`.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Project map
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- `app/(app)/` pages: dashboard, inbox, jobs, forecast, vendors, settings
+- `lib/` business logic (money in cents, approvals, forecast, job matching) and data access
+- `lib/data/` one interface, two backends: demo (in memory) and Supabase (Row Level Security)
+- `lib/integrations/` Plaid and QuickBooks
+- `supabase/migrations/` database schema; `supabase/tests/` security tests
+- `tests/` unit tests

@@ -88,9 +88,8 @@ export function Sidebar({
 
   const logo = (
     <Link href="/dashboard" className="flex items-center gap-2 px-4 py-4">
-      <span className="grid size-8 place-items-center rounded-lg bg-accent text-sm font-bold text-black">
-        {brand.name.slice(0, 1)}
-      </span>
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img src={brand.logo} alt="" className="size-8 rounded-lg" />
       <span className="text-lg font-semibold text-white">{brand.name}</span>
     </Link>
   );

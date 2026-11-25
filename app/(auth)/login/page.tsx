@@ -14,6 +14,7 @@ export default function LoginPage() {
         { name: "password", label: "Password", type: "password", autoComplete: "current-password" },
       ]}
       footer={{ text: "New here?", href: "/signup", link: "Create an account" }}
+      extraLink={{ href: "/forgot-password", label: "Forgot your password?" }}
     />
   );
 }

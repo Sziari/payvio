@@ -1,7 +1,7 @@
 import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
 
-const PUBLIC_PATHS = ["/login", "/signup", "/auth", "/api/inbound"];
+const PUBLIC_PATHS = ["/login", "/signup", "/forgot-password", "/auth", "/api/inbound", "/api/cron"];
 
 export async function middleware(request: NextRequest) {
   // Demo mode (no Supabase keys): everything is open and runs on sample data.

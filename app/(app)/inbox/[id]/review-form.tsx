@@ -25,7 +25,8 @@ function initialForm(inv: Invoice): InvoiceFormData {
     invoiceDate: inv.invoiceDate,
     dueDate: inv.dueDate,
     shipTo: inv.shipTo ?? "",
-    jobId: inv.jobId,
+    // Pre-select the suggested job until a person has confirmed
+    jobId: inv.jobId ?? (inv.confirmedAt ? null : inv.suggestedJobId),
     costType: inv.costType,
     subtotal: centsToInput(inv.subtotalCents),
     tax: centsToInput(inv.taxCents),

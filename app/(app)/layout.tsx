@@ -11,6 +11,9 @@ const FEATURE_PAGES: Record<string, boolean> = {
   "/payapps": features.payApps,
 };
 
+// Always render fresh: every page shows the signed-in company's live data.
+export const dynamic = "force-dynamic";
+
 export default async function AppLayout({ children }: { children: React.ReactNode }) {
   const { repo, user } = await requireContext();
   const [company, invoices] = await Promise.all([repo.getCompany(), repo.listInvoices()]);

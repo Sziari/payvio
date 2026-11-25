@@ -193,6 +193,8 @@ export function buildSampleData(today = todayISO()): SampleData {
     { id: "pay-3", jobId: "job-vacaville", customer: "Summit General Contractors", amountCents: 6_000_000, expectedDate: t(35), received: false, note: "Progress billing #1" },
     { id: "pay-4", jobId: "job-fairfield", customer: "Tri-Valley Construction", amountCents: 3_000_000, expectedDate: t(56), received: false, note: null },
     { id: "pay-5", jobId: "job-napa", customer: "Vintner Group", amountCents: 750_000, expectedDate: t(77), received: false, note: "Retention release" },
+    { id: "pay-6", jobId: "job-dixon", customer: "Westbrook Builders", amountCents: 4_000_000, expectedDate: t(40), received: false, note: "Progress billing #4" },
+    { id: "pay-7", jobId: "job-vacaville", customer: "Summit General Contractors", amountCents: 5_500_000, expectedDate: t(66), received: false, note: "Progress billing #2" },
   ];
 
   const friday = addDays(weekStart(today), 4);

@@ -84,6 +84,7 @@ export function CashLineChart({
           strokeWidth={2.5}
           dot={{ r: 3 }}
           activeDot={{ r: 5 }}
+          isAnimationActive={false}
         />
       </LineChart>
     </ResponsiveContainer>

@@ -1,26 +1,64 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Neutral tokens. Brand colors (--brand-*) are set from config/brand.ts in app/layout.tsx. */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bg: #f6f7f9;
+  --surface: #ffffff;
+  --surface-2: #f1f3f6;
+  --border: #e3e6eb;
+  --text: #111827;
+  --muted: #5b6472;
+  --ring: #93a4bd;
+}
+
+.dark {
+  --bg: #0e1116;
+  --surface: #161a21;
+  --surface-2: #1d222b;
+  --border: #2a303b;
+  --text: #e9ecf1;
+  --muted: #9aa3b2;
+  --ring: #4b5a72;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-border: var(--border);
+  --color-text: var(--text);
+  --color-muted: var(--muted);
+  --color-ring: var(--ring);
+  --color-primary: var(--brand-primary);
+  --color-accent: var(--brand-accent);
+  --color-success: var(--brand-success);
+  --color-danger: var(--brand-danger);
+  --font-sans: var(--brand-font), ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html,
+body {
+  background: var(--bg);
+  color: var(--text);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+/* react-grid-layout */
+.react-grid-item.react-grid-placeholder {
+  background: var(--brand-accent);
+  opacity: 0.15;
+  border-radius: 12px;
+}
+.react-grid-item > .react-resizable-handle::after {
+  border-color: var(--muted);
 }

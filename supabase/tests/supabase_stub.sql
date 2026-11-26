@@ -21,6 +21,6 @@ alter table storage.objects enable row level security;
 grant usage on schema storage to anon, authenticated, service_role;
 grant all on storage.objects to authenticated, service_role;
 
+-- Like newer Supabase projects: NO automatic table access for app roles.
+-- The migrations must grant what the app needs (0003_grants.sql).
 grant usage on schema public to anon, authenticated, service_role;
-alter default privileges in schema public grant all on tables to authenticated, service_role;
-alter default privileges in schema public grant execute on functions to authenticated, service_role;

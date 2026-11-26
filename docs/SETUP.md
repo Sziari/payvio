@@ -32,7 +32,8 @@ Open http://localhost:3000. Without any keys you'll see **demo mode**: sample co
 
 1. Create a free project at [supabase.com](https://supabase.com). Pick a region near California (e.g. West US).
 2. Open **SQL Editor**, paste the contents of `supabase/migrations/0001_init.sql`, press **Run**.
-   Then do the same with `supabase/migrations/0002_storage.sql`.
+   Then do the same with `supabase/migrations/0002_storage.sql` and `supabase/migrations/0003_grants.sql`
+   (newer Supabase projects need the third file, or sign-up loops back to the company-name page).
 3. **Project Settings → API**: copy
    - Project URL → `NEXT_PUBLIC_SUPABASE_URL`
    - `anon` `public` key → `NEXT_PUBLIC_SUPABASE_ANON_KEY`

@@ -45,9 +45,13 @@ do $$ begin
   if (select count(*) from storage.objects) <> 1 then raise exception 'FAIL: cross-company upload'; end if;
 end $$;
 
--- Secrets table is never readable by signed-in users
+-- Secrets table is never readable by signed-in users (no table permission at all)
 do $$ begin
-  if (select count(*) from public.connection_secrets) <> 0 then raise exception 'FAIL: secrets visible'; end if;
+  begin
+    perform 1 from public.connection_secrets;
+    raise exception 'FAIL: secrets table readable';
+  exception when insufficient_privilege then null;
+  end;
 end $$;
 \set ON_ERROR_STOP off
 insert into public.connection_secrets (connection_id, company_id, encrypted) values (gen_random_uuid(), :'a_id', 'x');
